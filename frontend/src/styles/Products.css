@@ -1,0 +1,139 @@
+.Products{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 10px;
+    animation: displayProducts 0.5s ease-out;
+    min-width: 550px;
+  }
+  
+  @keyframes displayProducts {
+    0%{
+        opacity: 0%;
+        transform: translateY(10%);
+    }
+    100%{
+        opacity: 100%;
+        transform: translateY(0%);
+    }
+  }
+
+  .Header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .title{
+    color: #017256;
+    margin: 10px;
+    font-size: 24px;
+  }
+  
+  .btn{
+    border-radius: 10px;
+    margin: 10px;
+    height: 40px;
+  }
+
+  .product-form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+  }
+
+  #pname{
+    width: 250px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+  }
+
+  #pid{
+    width: 150px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-left: 20px;
+  }
+
+  #pcategory{
+    width: 150px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-left: 20px;
+  }
+
+  #pquantity{
+    width: 100px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-left: 20px;
+  }
+
+  #pprice{
+    width: 120px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-left: 20px;
+  }
+
+  #add-product-btn{
+    margin-left: 20px;
+    width: 80px;
+    height: 40px;
+    background-color: #2f8d46;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .list-heading-product{
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(5, 2fr);
+    background-color: rgb(70, 212, 188);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 98%;
+  }
+  
+  .list-heading-product div{
+    text-align:start;
+    padding: 20px 10px;
+    font-size: 18px;
+  }
+  
+  .list-product{
+    overflow-y: scroll;
+    max-height: 33rem;
+    padding: 10px;
+  }
+  
+  .list-column-product{
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(5, 2fr);
+    border-radius: 10px;
+    border-bottom: 2px solid #d7d7de;
+    border-left: 1px solid #d7d7de;
+    border-right: 1px solid #d7d7de;
+    height: 65px;
+  }
+  
+  .list-column-product:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .list-column-product div{
+    padding: 15px 10px;
+    font-size: 16px;
+    text-align:start;
+    color: #000;
+  }

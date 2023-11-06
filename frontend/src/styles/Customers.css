@@ -1,0 +1,75 @@
+.Customers{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 10px;
+    animation: displayProducts 0.5s ease-out;
+    min-width: 550px;
+  }
+  
+  @keyframes displayProducts {
+    0%{
+        opacity: 0%;
+        transform: translateY(10%);
+    }
+    100%{
+        opacity: 100%;
+        transform: translateY(0%);
+    }
+  }
+  
+  .Header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .title{
+    color: #017256;
+    margin: 10px;
+    font-size: 24px;
+  }
+  
+  .btn{
+    border-radius: 10px;
+    margin: 10px;
+    height: 40px;
+  }
+  
+  .list-heading-customer{
+    display: grid;
+    grid-template-columns: 1fr 5fr 4fr 3fr;
+    background-color: rgb(70, 212, 188);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  .list-heading-customer div{
+    text-align:start;
+    padding: 20px 10px;
+    font-size: 18px;
+  }
+  
+  .list-customer{
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .list-column-customer{
+    display: grid;
+    grid-template-columns: 1fr 5fr 4fr 3fr;
+    border-radius: 10px;
+    border-bottom: 2px solid #d7d7de;
+  }
+  
+  .list-column-customer:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .list-column-customer div{
+    padding: 15px 10px;
+    font-size: 16px;
+    text-align:start;
+    color: #000;
+  }

@@ -1,0 +1,87 @@
+.menubar{
+    display: flex;
+    background-color: rgb(227, 250, 253);
+  }
+  
+  
+  /* ---------- SIDE NAVBAR ----------*/
+  .side{
+    width: 350px;
+    min-width: 180px;
+    display: flex;
+    color: #fff;
+    background-color: rgb(35, 170, 148);
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  ul{
+    list-style-type: none;
+  }
+  
+  #item-title{
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  i{
+    padding-right: 20px;
+  }
+  
+  .item{
+    font-size: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .item:hover {
+    font-size: 22px;
+    color: #000;
+  }
+  
+  /*---------- TOP NAVBAR ----------*/
+  
+  .main{
+    width: 100%;
+    min-width: 250px;
+  }
+  
+  .main-body{
+    margin: 20px;
+    border-radius: 10px;
+  }
+  
+  .top{
+    margin: 20px;
+    border-radius: 10px;
+  }
+  
+  .navbar{
+    border-radius: 10px;
+  }
+  
+  .navbar-brand{
+    color: #fff;
+    font-size: 24px;
+  }
+
+  .d-flex{
+    height: 40px;
+    border: none;
+  }
+  
+  .search{
+    width: 100px;
+    height: 40px;
+    background-color: rgb(11, 172, 194);
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .nav-link{
+    color: #fff;
+    font-size: 24px;
+  }
+  
