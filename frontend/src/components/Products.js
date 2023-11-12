@@ -1,9 +1,45 @@
-import React , {useState} from 'react'
+import React , {useState, useEffect} from 'react'
 import "../styles/Products.css";
 import {NavLink} from "react-router-dom";
 
 
 const Products = () => {
+
+  const [show, setShow] = useState(false);
+
+  const [productData, setProductData] = useState([]);
+
+  const callProductPage = async () => {
+    try{
+      const res = await fetch('/products', {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials:"include"
+        
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setProductData(data);
+
+      if(!res.status === 200 ) {
+        const error = new Error(res.error);
+        throw error;
+      }
+
+    } catch(err) {
+      console.log(err);
+    }
+
+  }
+
+  useEffect(() => {  
+    callProductPage();
+  }, []);
+
 
   const [product, setProduct] = useState({
     pid: "", 
@@ -43,14 +79,48 @@ const Products = () => {
     if(res.status === 422 || !data) {
       window.alert("Failed!");
     }
+
+    if(res.status === 420 || !data) {
+      window.alert("Product Already Exist");
+    }
     else {
       window.alert("Product Added Successful!");
+      callProductPage();
     }
-
+    setProduct({
+      pid: "", 
+      pname: "", 
+      pcategory: "", 
+      pquantity: "", 
+      pprice: ""
+    });
+    setShow(!show);
   };
-  
 
-  const [show, setShow] = useState(false);
+
+  let delproduct = "";
+  /*Delete Products */
+  const deleteProduct = async (event) => {
+      console.log(delproduct);
+      const res = await fetch("/deleteProduct", {
+      method: "DELETE",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        delproduct
+      })
+    });
+
+    if(res.status === 422) {
+      window.alert("Failed!");
+    }
+    else {
+      window.alert("Product Deleted Successful!");
+      callProductPage();
+    }
+  }
+  
 
   return (
     <>
@@ -68,7 +138,7 @@ const Products = () => {
                 <input id="pname" name="pname" type="text" placeholder="Product name" value={product.pname} onChange={handleInputs}/>
                 <input id="pid" name="pid" type="text" placeholder="Product ID" value={product.pid} onChange={handleInputs}/>
                 <select id="pcategory" name="pcategory" placeholder='Category' value={product.pcategory} onChange={handleInputs}>
-                <option selected disabled>Category</option>
+                  <option selected disabled>Category</option>
                   <option value="a">A</option>
                   <option value="b">B</option>
                   <option value="c">C</option>
@@ -89,20 +159,23 @@ const Products = () => {
           <div>Price</div>
           <div>Actions</div>
         </div>
-        
+
         <div className="list-product">
+
+        {productData.map((element, i) => (
             <div className='list-column-product'>
-              <div>1</div>
-              <div style={{textAlign: "start"}}>X</div>
-              <div>Product ID</div>
-              <div>Category</div>
-              <div>In-Stock</div>
-              <div>Price</div>
+              <div>{i+1}</div>
+              <div style={{textAlign: "start"}}>{element.pname}</div>
+              <div>{element.pid}</div>
+              <div>{element.pcategory}</div>
+              <div>{element.pquantity}</div>
+              <div>{element.pprice}</div>
               <div className='Action'>
-              <NavLink to="#"><img src='https://cdn-icons-png.flaticon.com/512/2951/2951136.png' alt='' width="25"/></NavLink> 
-                <NavLink to="#"><img src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png' alt=''  width="20"/></NavLink>
+              <NavLink to="#" ><img src='https://cdn-icons-png.flaticon.com/512/2951/2951136.png' alt='' width="25"/></NavLink> 
+              <NavLink to="#" onClick={() => { delproduct = element.pid; deleteProduct(element.pid)}} ><img src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png' alt=''  width="20"/></NavLink>
               </div>
             </div>
+          ))} 
         </div>
       </div>
     
