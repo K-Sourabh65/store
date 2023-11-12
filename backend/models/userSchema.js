@@ -29,8 +29,26 @@ const userSchema = new mongoose.Schema({
     },
     products: [
         {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'PRODUCT'
+            pid: {
+                type: String,
+                required: true
+            },
+            pname: {
+                type: String,
+                required: true
+            },
+            pcategory: {
+                type: String,
+                required: true
+            },
+            pquantity: {
+                type: Number,
+                required: true
+            },
+            pprice: {
+                type: Number,
+                required: true
+            }
         }
     ],
     customers: [
