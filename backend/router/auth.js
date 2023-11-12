@@ -100,14 +100,30 @@ router.post('/addProduct', async (req, res) => {
 
     const {pid, pname, pcategory, pquantity, pprice} = req.body;
 
+    if(!pid || !pname || !pcategory || !pquantity || !pprice) {
+        return res.status(422).json({error:"Please fill details correctly"});
+    }
+
     try{
 
-        const product = new Product({pid, pname, pcategory, pquantity, pprice});
+        // const product = new Product({pid, pname, pcategory, pquantity, pprice});
 
-        const user = await User.findOneAndUpdate({_id: req.params.id},{products:product});
+        const token = req.cookies.jwtoken;
+
+        const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+
+        const user = await User.findOne({_id:verifyToken._id});
         
+        user.products.forEach((element) => {
+            if(element.pid == pid) {
+                return res.status(420).json({ error: "Product Already Exist"});
+            }
+        });
+
+        user.products.push({pid, pname, pcategory, pquantity, pprice});
+
         const productAdded = await user.save();
-        
+
         if(productAdded) {
             return res.status(201).json({ message: "Product Added Successfully!"});
         }
@@ -120,6 +136,29 @@ router.post('/addProduct', async (req, res) => {
         console.log(err);
     } 
 
+});
+
+//Delete Product
+
+router.delete('/deleteProduct', async (req, res) => {
+
+    const token = req.cookies.jwtoken;
+    const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+    const user = await User.findOne({_id:verifyToken._id});
+
+    const { delproduct } = req.body;
+    console.log(delproduct);
+
+    user.products.pull({pid: delproduct});
+
+    const productDeleted = await user.save();
+        
+    if(productDeleted) {
+        return res.status(201).json({ message: "Product deleted Successfully!"});
+    }
+    else {
+        res.status(422).json({ error: "Failed!"});
+    }
 });
 
 
